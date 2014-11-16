@@ -6,21 +6,21 @@
 
 #ifndef ArduinoNunchuck_H_
 #define ArduinoNunchuck_H
-#include "Arduino.h"
+
+#define NUNCHUCK_ADDRESS 0x52
 
 class ArduinoNunchuck {
 public:
 	ArduinoNunchuck();
 	void init();
 	void update();
+	bool isCButton(), isZButton();
+	int getJoyX(), getJoyY(), getAccelX(), getAccelY(), getAccelZ();
 private:
-	int analogX;
-	int analogY;
-	int accelX;
-	int accelY;
-	int accelZ;
-	int zButton;
-	int cButton;
+	void sendByte(byte data, byte location);
+	byte nunchuk_decode_byte (byte x);
+	int joyX, joyY, accelX, accelY, accelZ;
+	bool zButton, cButton;
 };
 
 #endif
