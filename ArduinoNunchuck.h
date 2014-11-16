@@ -3,6 +3,7 @@
 // - include files
 // - extern variable definitions
 // In the appropriate section
+#include "Arduino.h"
 
 #ifndef ArduinoNunchuck_H_
 #define ArduinoNunchuck_H
@@ -18,7 +19,7 @@ public:
 	int getJoyX(), getJoyY(), getAccelX(), getAccelY(), getAccelZ();
 private:
 	void sendByte(byte data, byte location);
-	byte nunchuk_decode_byte (byte x);
+	uint8_t decode_byte (byte x);
 	int joyX, joyY, accelX, accelY, accelZ;
 	bool zButton, cButton;
 };

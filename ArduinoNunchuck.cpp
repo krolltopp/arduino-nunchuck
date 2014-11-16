@@ -25,7 +25,7 @@ void ArduinoNunchuck::update() {
 	Wire.requestFrom(NUNCHUCK_ADDRESS, 6);
 
 	while (Wire.available()) {
-		values[count] = nunchuk_decode_byte(Wire.read());
+		values[count] = decode_byte(Wire.read());
 		count++;
 	}
 
@@ -40,7 +40,7 @@ void ArduinoNunchuck::update() {
 	sendByte(0x00, 0x00);
 }
 
-void sendByte(byte data, byte location) {
+void ArduinoNunchuck::sendByte(byte data, byte location) {
 	Wire.beginTransmission(NUNCHUCK_ADDRESS);
 	Wire.write(location);
 	Wire.write(data);
@@ -48,7 +48,7 @@ void sendByte(byte data, byte location) {
 	delay(10);
 }
 
-byte nunchuk_decode_byte(byte x) {
+byte ArduinoNunchuck::decode_byte(byte x) {
 	x = (x ^ 0x17) + 0x17;
 	return x;
 }
