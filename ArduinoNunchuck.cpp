@@ -18,6 +18,38 @@ void ArduinoNunchuck::init() {
 	delay(100);
 }
 
+int ArduinoNunchuck::getAccelX() {
+	return accelX;
+}
+
+int ArduinoNunchuck::getAccelY() {
+	return accelY;
+}
+
+int ArduinoNunchuck::getAccelZ() {
+	return accelZ;
+}
+
+int ArduinoNunchuck::getJoyX() {
+	return joyX;
+}
+
+int ArduinoNunchuck::getJoyY() {
+	return joyY;
+}
+
+bool ArduinoNunchuck::isCButtonPressed() {
+	return cButton == 0;
+}
+
+bool ArduinoNunchuck::isZButtonPressed() {
+	return zButton == 0;
+}
+
+void ArduinoNunchuck::resetButtons() {
+	cButton = zButton = false;
+}
+
 void ArduinoNunchuck::update() {
 	int count = 0;
 	int values[6];
@@ -34,8 +66,8 @@ void ArduinoNunchuck::update() {
 	accelX = (values[2] << 2) | ((values[5] >> 2) & 3);
 	accelY = (values[3] << 2) | ((values[5] >> 4) & 3);
 	accelZ = (values[4] << 2) | ((values[5] >> 6) & 3);
-	zButton = !((values[5] >> 0) & 1);
-	cButton = !((values[5] >> 1) & 1);
+	zButton = ((values[5] >> 0) & 1);
+	cButton = ((values[5] >> 1) & 1);
 
 	sendByte(0x00, 0x00);
 }
@@ -49,6 +81,6 @@ void ArduinoNunchuck::sendByte(byte data, byte location) {
 }
 
 byte ArduinoNunchuck::decode_byte(byte x) {
-	x = (x ^ 0x17) + 0x17;
+	//x = (x ^ 0x17) + 0x17;
 	return x;
 }

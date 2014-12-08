@@ -3,10 +3,11 @@
 // - include files
 // - extern variable definitions
 // In the appropriate section
-#include "Arduino.h"
 
-#ifndef ArduinoNunchuck_H_
+#ifndef ArduinoNunchuck_H
 #define ArduinoNunchuck_H
+
+#include "Arduino.h"
 
 #define NUNCHUCK_ADDRESS 0x52
 
@@ -15,7 +16,8 @@ public:
 	ArduinoNunchuck();
 	void init();
 	void update();
-	bool isCButton(), isZButton();
+	bool isCButtonPressed(), isZButtonPressed();
+	void resetButtons();	
 	int getJoyX(), getJoyY(), getAccelX(), getAccelY(), getAccelZ();
 private:
 	void sendByte(byte data, byte location);
