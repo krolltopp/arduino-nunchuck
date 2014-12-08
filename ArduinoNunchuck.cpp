@@ -1,7 +1,5 @@
 // Do not remove the include below
 #include "ArduinoNunchuck.h"
-#include "Arduino.h"
-#include <Wire.h>
 
 ArduinoNunchuck::ArduinoNunchuck() {
 	cButton = zButton = false;

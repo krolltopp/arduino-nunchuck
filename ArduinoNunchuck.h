@@ -8,6 +8,7 @@
 #define ArduinoNunchuck_H
 
 #include "Arduino.h"
+#include <Wire.h>
 
 #define NUNCHUCK_ADDRESS 0x52
 
